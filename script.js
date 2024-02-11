@@ -1,3 +1,10 @@
+const rockBtn = document.querySelector(".rock-btn");
+const paperBtn = document.querySelector(".paper-btn");
+const scissorsBtn = document.querySelector(".scissors-btn");
+const currentRound = document.querySelector("[data-id='currentRound']");
+const yourScore = document.querySelector(".yourScore");
+const opponentScore = document.querySelector(".opponentScore");
+
 function getComputerChoice() {
   const optionsArr = ["Rock", "Paper", "Scissors"];
   const randomIndex = Math.floor(Math.random() * optionsArr.length);
@@ -35,28 +42,9 @@ function playRound(playerOption, computerOption, currentRound) {
 }
 
 function playGame() {
-  const maxRounds = 5;
-  let round = 1;
-  let result = "";
-
-  while (round <= maxRounds) {
-    const playerSelection = prompt("Enter 'rock', 'paper', or 'scissors': ");
-    const computerSelection = getComputerChoice().toLowerCase();
-    result = playRound(playerSelection, computerSelection, round);
-    if (!result) {
-      --round;
-    }
-    console.log(result);
-    round++;
-  }
-
-  if (playerScore > computerScore) return "Results: You win the game!";
-  else if (playerScore < computerScore) return "Results: The computer wins the game.";
-  else {
-    return "Results: It was a draw!";
-  }
+  
 }
 
 let playerScore = 0;
 let computerScore = 0;
-console.log(playGame());
+playGame();
