@@ -1,9 +1,14 @@
-const rockBtn = document.querySelector(".rock-btn");
-const paperBtn = document.querySelector(".paper-btn");
-const scissorsBtn = document.querySelector(".scissors-btn");
+// const rockBtn = document.querySelector(".rock-btn");
+// const paperBtn = document.querySelector(".paper-btn");
+// const scissorsBtn = document.querySelector(".scissors-btn");
 const currentRound = document.querySelector("[data-id='currentRound']");
 const yourScore = document.querySelector(".yourScore");
 const opponentScore = document.querySelector(".opponentScore");
+const gameOptionBtns = document.querySelectorAll(".game-btn");
+
+gameOptionBtns.forEach(btn => {
+  btn.addEventListener('click', playGame);
+})
 
 function getComputerChoice() {
   const optionsArr = ["Rock", "Paper", "Scissors"];
@@ -41,10 +46,12 @@ function playRound(playerOption, computerOption, currentRound) {
   }
 }
 
-function playGame() {
-  
+function playGame(e) {
+  let playerOption = e.target.dataset.option;
+  let computerOption = getComputerChoice().toLowerCase();
+
+  console.log(playerOption, computerOption);
 }
 
 let playerScore = 0;
 let computerScore = 0;
-playGame();
