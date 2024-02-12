@@ -1,10 +1,13 @@
 // const rockBtn = document.querySelector(".rock-btn");
 // const paperBtn = document.querySelector(".paper-btn");
 // const scissorsBtn = document.querySelector(".scissors-btn");
-const currentRound = document.querySelector("[data-id='currentRound']");
+const currentRound = document.querySelector("#currentRound");
 const yourScore = document.querySelector(".yourScore");
 const opponentScore = document.querySelector(".opponentScore");
 const gameOptionBtns = document.querySelectorAll(".game-btn");
+let round = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 gameOptionBtns.forEach(btn => {
   btn.addEventListener('click', playGame);
@@ -17,41 +20,38 @@ function getComputerChoice() {
   return randomOption;
 }
 
-function playRound(playerOption, computerOption, currentRound) {
-  playerOption.toLowerCase();
-
+function playRound(playerOption, computerOption) {
   if (playerOption === "rock" && computerOption === "paper") {
     computerScore++;
-    return `Round ${currentRound}: computer wins!`;
+    return "Opponent Wins!"
   } else if (playerOption === "paper" && computerOption === "scissors") {
     computerScore++;
-    return `Round ${currentRound}: computer wins!`;
+    return "Opponent Wins!"
   } else if (playerOption === "scissors" && computerOption === "rock") {
     computerScore++;
-    return `Round ${currentRound}: computer wins!`;
+    return "Opponent Wins!"
   } else if (playerOption === "rock" && computerOption === "scissors") {
     playerScore++;
-    return `Round ${currentRound}: you win!`;
+    return "You Win!"
   } else if (playerOption === "paper" && computerOption === "rock") {
     playerScore++;
-    return `Round ${currentRound}: you win!`;
+    return "You Win!"
   } else if (playerOption === "scissors" && computerOption === "paper") {
     playerScore++;
-    return `Round ${currentRound}: you win!`;
+    return "You Win!"
   } else if (playerOption === computerOption){
-    return `Round ${currentRound}: It's a draw!`;
-  } else {
-    console.log(`Round ${currentRound}: Invalid option. Please try again.`)
-    return false;
+    return "It's a draw!";
   }
 }
 
 function playGame(e) {
-  let playerOption = e.target.dataset.option;
-  let computerOption = getComputerChoice().toLowerCase();
-
-  console.log(playerOption, computerOption);
+  if (round < 5) {
+    let playerOption = e.target.dataset.option.toLowerCase();
+    let computerOption = getComputerChoice().toLowerCase();
+    let result = playRound(playerOption, computerOption);
+    round++;
+    currentRound.innerText = round;
+    console.log(playerScore, computerScore);
+  } else if (round === 5) {
+  }
 }
-
-let playerScore = 0;
-let computerScore = 0;
