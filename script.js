@@ -76,7 +76,6 @@ function playGame(e) {
 
 function playAgain(e, dialog) {
   e.stopPropagation();
-
   const option = e.target.dataset.option.toLowerCase();
   if (option === 'yes') {
     dialog.close();
