@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
   <script defer src="./script.js"></script>
   <title>Rock Paper Scissors</title>
 </head>
@@ -18,13 +19,15 @@
     </section>
     <section class="game-output">
       <h3 class="round">Round <span id="currentRound"></span></h3>
-      <div class="your-score">
-        <h2>Your score</h2>
-        <div class="score yourScore"></div>
-      </div>
-      <div class="opponent-score">
-        <h2>Opponent's score</h2>
-        <div class="score opponentScore"></div>
+      <div class="scores">
+        <div class="your-score">
+          <h2>You</h2>
+          <div class="score yourScore"></div>
+        </div>
+        <div class="opponent-score">
+          <h2>Comp</h2>
+          <div class="score opponentScore"></div>
+        </div>
       </div>
       <div class="round-results"></div>
     </section>
