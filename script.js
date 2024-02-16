@@ -26,24 +26,16 @@ function getComputerChoice() {
 function playRound(playerOption, computerOption) {
   if (playerOption === "rock" && computerOption === "paper") {
     computerScore++;
-    return "Opponent Wins!"
   } else if (playerOption === "paper" && computerOption === "scissors") {
     computerScore++;
-    return "Opponent Wins!"
   } else if (playerOption === "scissors" && computerOption === "rock") {
     computerScore++;
-    return "Opponent Wins!"
   } else if (playerOption === "rock" && computerOption === "scissors") {
     playerScore++;
-    return "You Win!"
   } else if (playerOption === "paper" && computerOption === "rock") {
     playerScore++;
-    return "You Win!"
   } else if (playerOption === "scissors" && computerOption === "paper") {
     playerScore++;
-    return "You Win!"
-  } else if (playerOption === computerOption) {
-    return "It's a draw!";
   }
 }
 
@@ -51,7 +43,7 @@ function playGame(e) {
   e.stopPropagation();
   let playerOption = e.target.dataset.option.toLowerCase();
   let computerOption = getComputerChoice().toLowerCase();
-  let result = playRound(playerOption, computerOption);
+  playRound(playerOption, computerOption);
   if (round < 5) {
     // update player or opponent score
     round++;
@@ -59,6 +51,15 @@ function playGame(e) {
     opponentScore.innerText = computerScore;
     currentRound.innerText = round;
   } else if (round === 5) {
+    // disable game option buttons
+    gameOptionBtns.forEach(btn => btn.setAttribute('disabled', true));
+
+    const promptDialog = document.querySelector('.end-game-modal');
+    promptDialog.showModal();
+    const playAgainBtns = document.querySelectorAll('.play-again-btn');
+    playAgainBtns.forEach(btn => btn.addEventListener('click', (e) => playAgain(e, promptDialog)));
+
+
     currentRound.innerText = 5;
     // update player or opponent score
     yourScore.innerText = playerScore;
@@ -70,5 +71,17 @@ function playGame(e) {
     } else {
       gameOutput.appendChild(document.createTextNode("Opponent wins this time."))
     }
+  }
+}
+
+function playAgain(e, dialog) {
+  e.stopPropagation();
+
+  const option = e.target.dataset.option.toLowerCase();
+  if (option === 'yes') {
+    dialog.close();
+  } else {
+    e.preventDefault();
+    dialog.close();
   }
 }
